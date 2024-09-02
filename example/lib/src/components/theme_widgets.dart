@@ -21,7 +21,7 @@ class ThemeWidgets extends StatelessWidget {
                 data: UiTheme.halloween().light,
                 child: UiButton(text: 'Set Halloween Theme', onTap: () => context.themeController.toggleTheme(UiTheme.halloween()))),
             Theme(
-                data: UiTheme.primary().light,
+                data: context.isDark ? UiTheme.primary().dark : UiTheme.primary().light,
                 child: UiButton(text: 'Set Primary Theme', onTap: () => context.themeController.toggleTheme(UiTheme.primary()))),
           ],
         ));

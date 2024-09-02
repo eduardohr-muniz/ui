@@ -153,7 +153,7 @@ class _UiButtonState extends State<UiButton> {
       };
 
   bool _isLoad = false;
-  final _borderradius = BorderRadius.circular(10);
+  final _borderradius = BorderRadius.circular(8);
 
   Future<void> _callFunction(FutureOr<void> Function()? func) async {
     if (widget.disable || _isLoad) return;
@@ -188,7 +188,7 @@ class _UiButtonState extends State<UiButton> {
                 ? null
                 : BoxDecoration(
                     borderRadius: _borderradius,
-                    border: Border.all(color: style.borderColor ?? Colors.transparent),
+                    border: Border.all(color: style.borderColor ?? Colors.transparent, width: 1.5),
                   ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -200,13 +200,27 @@ class _UiButtonState extends State<UiButton> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     if (widget.prefixIcon != null)
-                      Padding(padding: const EdgeInsets.only(right: 8), child: Icon(widget.prefixIcon, color: style.textColor)),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: Icon(
+                          widget.prefixIcon,
+                          color: style.textColor,
+                          size: 18,
+                        ),
+                      ),
                     Text(
                       widget.text,
-                      style: context.textTheme.bodyLarge?.copyWith(color: style.textColor, fontWeight: FontWeight.w700),
+                      style: context.textTheme.bodyLarge?.copyWith(color: style.textColor, fontWeight: FontWeight.w500),
                     ),
                     if (widget.suffixIcon != null)
-                      Padding(padding: const EdgeInsets.only(left: 8), child: Icon(widget.suffixIcon, color: style.textColor)),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8),
+                        child: Icon(
+                          widget.suffixIcon,
+                          color: style.textColor,
+                          size: 18,
+                        ),
+                      ),
                   ],
                 ),
               ),

@@ -15,7 +15,7 @@ class BaseComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Align(alignment: Alignment.topLeft, child: Text(title, style: context.textTheme.displayLarge)),
+        Align(alignment: Alignment.topLeft, child: Text(title, style: context.textTheme.displaySmall)),
         const SizedBox(height: 20),
         child,
         const SizedBox(height: 20),
