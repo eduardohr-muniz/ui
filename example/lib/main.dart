@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return UiThemeProvider().builder(
+    return UiThemeProvider.builder(
       context,
       themeController: UiThemeController(context, theme: UiTheme.primary(), themeMode: ThemeMode.light),
       builder: (theme) => MaterialApp(

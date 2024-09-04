@@ -12,7 +12,7 @@ class UiThemeProvider {
 
   UiThemeController get themeController => _themeControlller!;
 
-  Widget builder(
+  static Widget builder(
     BuildContext context, {
     required UiThemeController themeController,
     required Widget Function(UiThemeController theme) builder,
