@@ -1,5 +1,8 @@
 import 'package:example/src/components/buttons_widgets.dart';
+import 'package:example/src/components/colors_tokens_widgets.dart';
+import 'package:example/src/components/icon_buttons_widgets.dart';
 import 'package:example/src/components/theme_widgets.dart';
+import 'package:example/src/components/typograph_widgets.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -18,6 +21,9 @@ class HomePage extends StatelessWidget {
             children: [
               ThemeWidgets(),
               ButtonsWidgets(),
+              IconButtonsWidgets(),
+              ColorsTokensWidgets(),
+              TypographWidgets(),
             ],
           ),
         ),

@@ -2,65 +2,64 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:ui/ui.dart';
 
-enum UiButtonStyle { primary, secondary, destructive, outlined, text }
+enum UiButtonStyleEnum { primary, secondary, destructive, outlined, text }
 
-class _UiButtonStyle {
+class UiButtonStyle {
   final Color backgroundColor;
   final Color onHoverColor;
-  final Color textColor;
+  final Color onBackgorundColor;
   final Color? borderColor;
 
-  _UiButtonStyle({
+  UiButtonStyle({
     required this.backgroundColor,
     required this.onHoverColor,
-    required this.textColor,
+    required this.onBackgorundColor,
     this.borderColor,
   });
 
-  factory _UiButtonStyle.primary(UiColorSchemeExtension colors) {
-    return _UiButtonStyle(
+  factory UiButtonStyle.primary(UiColorSchemeExtension colors) {
+    return UiButtonStyle(
       backgroundColor: colors.primary,
-      textColor: colors.onPrimary,
+      onBackgorundColor: colors.onPrimary,
       borderColor: null,
-      onHoverColor: colors.primary.withOpacity(0.8),
+      onHoverColor: colors.primary600,
     );
   }
 
-  factory _UiButtonStyle.secondary(UiColorSchemeExtension colors, ThemeMode themeMode) {
-    final isDarkMode = themeMode == ThemeMode.dark;
-    return _UiButtonStyle(
-      backgroundColor: Colors.grey.shade800,
-      textColor: Colors.white,
+  factory UiButtonStyle.secondary(UiColorSchemeExtension colors, ThemeMode themeMode) {
+    return UiButtonStyle(
+      backgroundColor: colors.secondary,
+      onBackgorundColor: colors.onSecondary,
       borderColor: null,
-      onHoverColor: isDarkMode ? colors.muted : colors.secondary.withOpacity(0.8),
+      onHoverColor: colors.secondary600,
     );
   }
 
-  factory _UiButtonStyle.destructive(UiColorSchemeExtension colors, {required ThemeMode themeMode}) {
-    return _UiButtonStyle(
+  factory UiButtonStyle.destructive(UiColorSchemeExtension colors, {required ThemeMode themeMode}) {
+    return UiButtonStyle(
       backgroundColor: colors.destructive,
-      textColor: colors.onDestructive,
+      onBackgorundColor: colors.onDestructive,
       borderColor: null,
-      onHoverColor: colors.destructive.withOpacity(0.8),
+      onHoverColor: colors.destructive600,
     );
   }
 
-  factory _UiButtonStyle.outlined(UiColorSchemeExtension colors, {required ThemeMode themeMode}) {
+  factory UiButtonStyle.outlined(UiColorSchemeExtension colors, {required ThemeMode themeMode}) {
     final isDarkMode = themeMode == ThemeMode.dark;
-    return _UiButtonStyle(
+    return UiButtonStyle(
       backgroundColor: Colors.transparent,
-      textColor: colors.onBackground,
+      onBackgorundColor: colors.onBackground,
       borderColor: colors.border,
       onHoverColor: isDarkMode ? colors.muted.withOpacity(0.8) : colors.secondary.withOpacity(0.8),
     );
   }
 
-  factory _UiButtonStyle.text(UiColorSchemeExtension colors, {required ThemeMode themeMode}) {
-    return _UiButtonStyle(
+  factory UiButtonStyle.text(UiColorSchemeExtension colors, {required ThemeMode themeMode}) {
+    return UiButtonStyle(
       backgroundColor: Colors.transparent,
-      textColor: colors.onBackground,
+      onBackgorundColor: colors.onBackground,
       borderColor: null,
-      onHoverColor: colors.primary.withOpacity(0.1),
+      onHoverColor: colors.onBackground.withOpacity(0.1),
     );
   }
 }
@@ -74,7 +73,7 @@ class UiButton extends StatefulWidget {
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final bool disable;
-  final UiButtonStyle style;
+  final UiButtonStyleEnum style;
 
   const UiButton({
     super.key,
@@ -86,7 +85,7 @@ class UiButton extends StatefulWidget {
     this.onDoubleTap,
     this.onSecondaryTap,
     this.onLongPress,
-  }) : style = UiButtonStyle.primary;
+  }) : style = UiButtonStyleEnum.primary;
 
   const UiButton.secondary({
     super.key,
@@ -98,7 +97,7 @@ class UiButton extends StatefulWidget {
     this.onDoubleTap,
     this.onSecondaryTap,
     this.onLongPress,
-  }) : style = UiButtonStyle.secondary;
+  }) : style = UiButtonStyleEnum.secondary;
 
   const UiButton.destructive({
     super.key,
@@ -110,7 +109,7 @@ class UiButton extends StatefulWidget {
     this.onDoubleTap,
     this.onSecondaryTap,
     this.onLongPress,
-  }) : style = UiButtonStyle.destructive;
+  }) : style = UiButtonStyleEnum.destructive;
 
   const UiButton.outlined({
     super.key,
@@ -122,7 +121,7 @@ class UiButton extends StatefulWidget {
     this.onDoubleTap,
     this.onSecondaryTap,
     this.onLongPress,
-  }) : style = UiButtonStyle.outlined;
+  }) : style = UiButtonStyleEnum.outlined;
 
   const UiButton.text({
     super.key,
@@ -134,7 +133,7 @@ class UiButton extends StatefulWidget {
     this.onDoubleTap,
     this.onSecondaryTap,
     this.onLongPress,
-  }) : style = UiButtonStyle.text;
+  }) : style = UiButtonStyleEnum.text;
 
   @override
   State<UiButton> createState() => _UiButtonState();
@@ -144,12 +143,12 @@ class _UiButtonState extends State<UiButton> {
   ThemeMode get themeMode => Theme.of(context).brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light;
   UiColorSchemeExtension get colors => context.colors;
 
-  _UiButtonStyle get style => switch (widget.style) {
-        UiButtonStyle.primary => _UiButtonStyle.primary(colors),
-        UiButtonStyle.secondary => _UiButtonStyle.secondary(colors, themeMode),
-        UiButtonStyle.destructive => _UiButtonStyle.destructive(colors, themeMode: themeMode),
-        UiButtonStyle.outlined => _UiButtonStyle.outlined(colors, themeMode: themeMode),
-        _ => _UiButtonStyle.text(colors, themeMode: themeMode),
+  UiButtonStyle get style => switch (widget.style) {
+        UiButtonStyleEnum.primary => UiButtonStyle.primary(colors),
+        UiButtonStyleEnum.secondary => UiButtonStyle.secondary(colors, themeMode),
+        UiButtonStyleEnum.destructive => UiButtonStyle.destructive(colors, themeMode: themeMode),
+        UiButtonStyleEnum.outlined => UiButtonStyle.outlined(colors, themeMode: themeMode),
+        _ => UiButtonStyle.text(colors, themeMode: themeMode),
       };
 
   bool _isLoad = false;
@@ -157,15 +156,17 @@ class _UiButtonState extends State<UiButton> {
 
   Future<void> _callFunction(FutureOr<void> Function()? func) async {
     if (widget.disable || _isLoad) return;
-    if (func != null) {
-      setState(() {
-        _isLoad = true;
-      });
-      await func.call();
-      setState(() {
-        _isLoad = false;
-      });
-    }
+    if (func == null) return;
+
+    if (func is! Future<void> Function()) return func.call();
+
+    setState(() {
+      _isLoad = true;
+    });
+    await func.call();
+    setState(() {
+      _isLoad = false;
+    });
   }
 
   @override
@@ -194,7 +195,7 @@ class _UiButtonState extends State<UiButton> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: VisibilityProgressIndicator(
                 visibility: _isLoad,
-                color: style.textColor,
+                color: style.onBackgorundColor,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -204,20 +205,20 @@ class _UiButtonState extends State<UiButton> {
                         padding: const EdgeInsets.only(right: 8),
                         child: Icon(
                           widget.prefixIcon,
-                          color: style.textColor,
+                          color: style.onBackgorundColor,
                           size: 18,
                         ),
                       ),
                     Text(
                       widget.text,
-                      style: context.textTheme.bodyLarge?.copyWith(color: style.textColor, fontWeight: FontWeight.w500),
+                      style: context.textTheme.bodyLarge?.copyWith(color: style.onBackgorundColor, fontWeight: FontWeight.w500),
                     ),
                     if (widget.suffixIcon != null)
                       Padding(
                         padding: const EdgeInsets.only(left: 8),
                         child: Icon(
                           widget.suffixIcon,
-                          color: style.textColor,
+                          color: style.onBackgorundColor,
                           size: 18,
                         ),
                       ),

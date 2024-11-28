@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return UiThemeProvider.builder(
       context,
-      themeController: UiThemeController(context, theme: UiTheme.primary(), themeMode: ThemeMode.light),
+      themeController: UiThemeController(context, theme: UiTheme.primary(), themeMode: ThemeMode.system),
       builder: (theme) => MaterialApp(
         title: 'Flutter Demo',
         theme: theme.light,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ui/src/providers/providers_export.dart';
-import 'package:ui/src/theme/ui_theme_export.dart';
+import 'package:ui/src/theme/ui_color_scheme_extension.dart';
+import 'package:ui/src/theme/ui_themes.dart';
 
 class UiThemeController extends ChangeNotifier {
   final BuildContext _context;

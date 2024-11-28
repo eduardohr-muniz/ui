@@ -42,6 +42,8 @@ class ButtonsWidgets extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 20),
+          const Divider(),
+          const SizedBox(height: 20),
           OverflowBar(
             spacing: 12,
             overflowSpacing: 12,
@@ -62,7 +64,9 @@ class ButtonsWidgets extends StatelessWidget {
                 text: 'icons',
                 prefixIcon: Icons.circle_outlined,
                 suffixIcon: Icons.circle_outlined,
-                onTap: () {},
+                onTap: () async {
+                  log('Pressed icons');
+                },
               ),
               UiButton(
                 text: 'Press Loader',
